@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\OriginalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller(OriginalController::class)->prefix('admin')->group(function() {
+    Route::get('original/create', 'add');
+    Route::get('original/create', 'edit');
+    Route::get('original/create', 'delate');
+    Route::get('original/create', 'update');
+    
+    Route::get('original/edit', 'add');
+    Route::get('original/edit', 'edit');
+    Route::get('original/edit', 'delate');
+    Route::get('original/edit', 'update');
+    
+});
+
