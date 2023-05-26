@@ -7,26 +7,28 @@ use Illuminate\Http\Request;
 
 class OriginalController extends Controller
 {
+    public function index()
+    {
+        return view('toppage');
+    }
     
-    public function add()
+    public function service()
     {
-        return view('admin.original.create');
+        return view('service');
     }
-
-    public function create()
+    
+    public function list()
     {
-        return redirect('admin/original/create');
+        return view('list');
     }
-
-    public function edit()
+    
+    public function mypage()
     {
-        return view('admin.original.edit');
+        return view('mypage');
     }
-
-    public function update()
+    
+    public function newpost()
     {
-        return redirect('admin/original/edit');
+        return view('newpost');
     }
-        
-
 }

@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\OriginalController;
+use App\Http\Controllers\Admin\MypageController;
+use App\Http\Controllers\Admin\ShrineController;
+
+
+
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,20 +21,30 @@ use App\Http\Controllers\Admin\OriginalController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+ Route::get('/', [OriginalController::class, 'index'])->name('top');
+ Route::get('/service', [OriginalController::class, 'service'])->name('service');
+ Route::get('/list', [OriginalController::class, 'list'])->name('list');
+
+ 
+ 
+ 
+ 
+ 
+Route::controller(MypageController::class)->prefix('mypage')->middleware('auth')->group(function () {
+    Route::get('/', 'index')->name('mypage');
 });
 
-Route::controller(OriginalController::class)->prefix('admin')->group(function() {
-    Route::get('original/create', 'add');
-    Route::get('original/create', 'edit');
-    Route::get('original/create', 'delate');
-    Route::get('original/create', 'update');
-    
-    Route::get('original/edit', 'add');
-    Route::get('original/edit', 'edit');
-    Route::get('original/edit', 'delate');
-    Route::get('original/edit', 'update');
-    
+Route::controller(ShrineController::class)->name('shrine.')->middleware('auth')->group(function () {
+    Route::get('/newpost', 'add')->name('newpost');
+    Route::post('/newpost', 'create')->name('create');
+    Route::get('/edit','edit')->name('edit');
+    Route::post('/edit','update')->name('update');
 });
-
+ 
